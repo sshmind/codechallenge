@@ -8,8 +8,7 @@ follow below steps to start codechallenge project:
 step 1:
     to start project it's better idea to create a virtual environment and switch on it:
         a)[create virtual environment]: virtualenv .venv
-
-        b) [switch to virtual environment]: [linux]$ source .venv/bin/activate / [windows]> .\.venv\Scripts\activate
+        b)switch to virtual environment: [linux]$ source .venv/bin/activate / [windows]> .\.venv\Scripts\activate
 
 step 2:
     install project requirements. project requirements saved in requirements.txt file:

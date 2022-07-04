@@ -131,8 +131,8 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
-news_wallpapers/
-news/news_wallpapers
+news_images/
+news/news_images
 # Environments
 .env
 .venv

@@ -4,6 +4,7 @@ import requests
 
 from .serializers import AuthorSerializer, TagSerializer, ArticleSerializer
 from .models import Author, Article, Tag
+from .utils import retrieve_image
 
 
 
@@ -50,3 +51,12 @@ def feed_news(request):
     return Response(data)
 
 
+
+@api_view(['GET'])
+def download_images(request, count):
+    articles = Article.objects.all().order_by('-date_published', '-date_modified')[:count]
+    for article in articles:
+        if article.image:
+            retrieve_image(article.image, article.id)
+    
+    return Response({'message': 'Done'})

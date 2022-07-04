@@ -21,7 +21,7 @@ step 3:
     $ python manage.py runserver
 
 step 4:
-    you send request follow API list:
+    you can send request to follow API list:
     
         - 127.0.0.1:8000/feed_news/ : save and reteurn 5 last news from https://feeds.npr.org/1004/feed.json
         

@@ -10,10 +10,12 @@ from .utils import retrieve_image
 
 def add_data(article):
     """serializer operations"""
-    author_serializer = AuthorSerializer(data=article['author'])
-    if author_serializer.is_valid():
-        author_serializer.save()
-    
+
+    if 'author' in article.keys():
+        author_serializer = AuthorSerializer(data=article['author'])
+        if author_serializer.is_valid():
+            author_serializer.save()
+        
     if 'tags' in article.keys():
         for tag in article['tags']:
             tag_serializer = TagSerializer(data={'name': tag})
@@ -36,17 +38,20 @@ def feed_news(request):
 
     for article_dict in data:
         add_data(article_dict)
-        
-        article = Article.objects.get(id=article_dict['id'])
-        author = Author.objects.get(name=article_dict['author']['name'])
 
+        article = Article.objects.get(id=article_dict['id'])
+        
+        if 'author' in article_dict.keys():
+            author = Author.objects.get(name=article_dict['author']['name'])
+            article.author = author
+            article.save()
+        
         if 'tags' in article_dict.keys():
             for tag in article_dict['tags']:
                 tag_obj = Tag.objects.get(name=tag)
                 article.tags.add(tag_obj)
-            
-        article.author = author
-        article.save()
+                article.save()
+
 
     return Response(data)
 

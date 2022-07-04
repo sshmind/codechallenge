@@ -26,3 +26,27 @@ def add_data(article):
         article_serializer.save()
 
 
+@api_view(['GET'])
+def feed_news(request):
+    
+
+    res = requests.get('https://feeds.npr.org/1004/feed.json')
+    data = res.json()['items'][:5]
+
+    for article_dict in data:
+        add_data(article_dict)
+        
+        article = Article.objects.get(id=article_dict['id'])
+        author = Author.objects.get(name=article_dict['author']['name'])
+
+        if 'tags' in article_dict.keys():
+            for tag in article_dict['tags']:
+                tag_obj = Tag.objects.get(name=tag)
+                article.tags.add(tag_obj)
+            
+        article.author = author
+        article.save()
+
+    return Response(data)
+
+

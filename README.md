@@ -1,13 +1,13 @@
 codechallenge project
-127.0.0.1:8000/feed_news/ : save and reteurn 5 last news in https://feeds.npr.org/1004/feed.json
-127.0.0.1:8000/download_news_images/{int:number of records to download images}
 
 
 follow below steps to start codechallenge project:
 
 step 1:
     to start project it's better idea to create a virtual environment and switch on it:
+        
         a)[create virtual environment]: virtualenv .venv
+        
         b)switch to virtual environment: [linux]$ source .venv/bin/activate / [windows]> .\.venv\Scripts\activate
 
 step 2:
